@@ -4,7 +4,6 @@
 
 // Dependencies
 const http = require('http');
-const { parse } = require('path');
 const url = require('url');
 const port = 3000;
 
@@ -17,17 +16,20 @@ var server = http.createServer(function (req, res) {
 	var path = parsedUrl.pathname;
 	var trimmedPath = path.replace(/^\/+|\/+$/g, '');
 
+	// Get the query string as an object
+	var queryStringObject = parsedUrl.query;
+
 	// Get the HTTP method
 	var method = req.method.toLowerCase();
 
-	// Get the query string as an object
-	var queryStringObject = parsedUrl.query;
+	// Get the headers as an object
+	var headers = req.headers;
 
 	// Send the response
 	res.end('Hello World!\n');
 
 	// Log the request path
-	console.log(`Request received on path : ${trimmedPath} with method ${method} and with these query string parameters `, queryStringObject);
+	console.log(`Request received with these headers `, headers);
 });
 
 // Start the server, and have it listen on port 3000
