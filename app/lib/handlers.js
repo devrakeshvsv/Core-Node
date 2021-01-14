@@ -187,7 +187,8 @@ handlers._users.delete = function (data, callback) {
 						_data.delete('users', phone, function (err) {
 							if (!err) {
 								// Delete each of the checks associated with the user
-								var userChecks = typeof userData.userChecks == 'object' && userData.userChecks instanceof Array ? userData.userChecks : [];
+								var userChecks = typeof userData.checks == 'object' && userData.checks instanceof Array ? userData.checks : [];
+								console.log(userChecks);
 								var checksToDelete = userChecks.length;
 								if (checksToDelete > 0) {
 									var checksDeleted = 0;
