@@ -12,6 +12,11 @@ environments.staging = {
 	envName: 'staging',
 	hashingSecret: 'thisIsASecret',
 	maxChecks: 5,
+	twilio: {
+		accountSid: 'AC7a58296214dba8a58a1e3f3ad3129edf',
+		authToken: '1126abb254cd55a6e545b533ff2745ef',
+		fromPhone: '+12057281654',
+	},
 };
 
 // Production environment
@@ -21,8 +26,12 @@ environments.production = {
 	envName: 'production',
 	hashingSecret: 'thisIsAlsoASecret',
 	maxChecks: 5,
+	twilio: {
+		accountSid: 'AC7a58296214dba8a58a1e3f3ad3129edf',
+		authToken: '1126abb254cd55a6e545b533ff2745ef',
+		fromPhone: '+12057281654',
+	},
 };
-
 // Determine which environment was passed as a command-line argument
 var currentEnv = typeof process.env.NODE_ENV == 'string' ? process.env.NODE_ENV.toLowerCase() : '';
 
