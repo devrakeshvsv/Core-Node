@@ -58,10 +58,10 @@ helpers.createRandomString = function (strLength) {
 helpers.sendTwilioSms = function (phone, msg, callback) {
 	// Validate parameters
 	phone = typeof phone == 'string' && phone.trim().length == 10 ? phone.trim() : false;
-	msg = typeof msg == 'string' && msg.trim().length <= 1600 ? msg.trim() : false;
+	msg = typeof msg == 'string' && msg.trim().length > 0 && msg.trim().length <= 1600 ? msg.trim() : false;
 
 	if (phone && msg) {
-		// Config the request payload
+		// Configure the request payload
 		var payload = {
 			From: config.twilio.fromPhone,
 			To: `+91${phone}`,
@@ -108,7 +108,7 @@ helpers.sendTwilioSms = function (phone, msg, callback) {
 		// End the request
 		req.end();
 	} else {
-		callback('Giving parameters were missin or invalid');
+		callback('Given parameters were missing or invalid');
 	}
 };
 
