@@ -54,14 +54,14 @@ helpers.createRandomString = function (strLength) {
 	}
 };
 
-// Send an SMS via Twilio
+// Send an SMS message via Twilio
 helpers.sendTwilioSms = function (phone, msg, callback) {
 	// Validate parameters
 	phone = typeof phone == 'string' && phone.trim().length == 10 ? phone.trim() : false;
-	msg = typeof msg == 'string' && msg.trim().length > 0 && msg.trim().length <= 1600 ? msg.trim() : false;
+	msg = typeof msg == 'string' && msg.trim().length <= 1600 ? msg.trim() : false;
 
 	if (phone && msg) {
-		// Configure the request payload
+		// Config the request payload
 		var payload = {
 			From: config.twilio.fromPhone,
 			To: `+91${phone}`,
@@ -86,8 +86,9 @@ helpers.sendTwilioSms = function (phone, msg, callback) {
 
 		// Instantiate the request object
 		var req = https.request(requestDetails, function (res) {
-			// Grab the status of the sent requests
+			// Grab the status of the sent request
 			var status = res.statusCode;
+
 			// Callback successfully if the request went through
 			if (status == 200 || status == 201) {
 				callback(false);
@@ -107,7 +108,7 @@ helpers.sendTwilioSms = function (phone, msg, callback) {
 		// End the request
 		req.end();
 	} else {
-		callback('Given parameters were missing or invalid');
+		callback('Giving parameters were missin or invalid');
 	}
 };
 
