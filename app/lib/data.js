@@ -16,7 +16,7 @@ lib.baseDir = path.join(__dirname, '../.data/');
 // Write data to a file
 lib.create = function (dir, file, data, callback) {
 	// Open the file for writing
-	fs.open(`${this.baseDir}${dir}/${file}.json`, 'wx', function (err, fileDescriptor) {
+	fs.open(`${lib.baseDir}${dir}/${file}.json`, 'wx', function (err, fileDescriptor) {
 		if (!err && fileDescriptor) {
 			// Convert data to string
 			var stringData = JSON.stringify(data);
@@ -43,7 +43,7 @@ lib.create = function (dir, file, data, callback) {
 
 // Read data from a file
 lib.read = function (dir, file, callback) {
-	fs.readFile(`${this.baseDir}${dir}/${file}.json`, 'utf-8', function (err, data) {
+	fs.readFile(`${lib.baseDir}${dir}/${file}.json`, 'utf-8', function (err, data) {
 		if ((!err, data)) {
 			var parsedData = helpers.parseJsonToObject(data);
 			callback(false, parsedData);
@@ -56,7 +56,7 @@ lib.read = function (dir, file, callback) {
 // Update data inside a file
 lib.update = function (dir, file, data, callback) {
 	// Open the file for writing
-	fs.open(`${this.baseDir}${dir}/${file}.json`, 'r+', function (err, fileDescriptor) {
+	fs.open(`${lib.baseDir}${dir}/${file}.json`, 'r+', function (err, fileDescriptor) {
 		if (!err && fileDescriptor) {
 			// Convert data to string
 			var stringData = JSON.stringify(data);
@@ -91,7 +91,7 @@ lib.update = function (dir, file, data, callback) {
 // Delete a file
 lib.delete = function (dir, file, callback) {
 	// Unlink the file
-	fs.unlink(`${this.baseDir}${dir}/${file}.json`, function (err) {
+	fs.unlink(`${lib.baseDir}${dir}/${file}.json`, function (err) {
 		if (!err) {
 			callback(false);
 		} else {
@@ -102,7 +102,7 @@ lib.delete = function (dir, file, callback) {
 
 // List all the items in a directory
 lib.list = function (dir, callback) {
-	fs.readdir(`${this.baseDir}${dir}/`, function (err, data) {
+	fs.readdir(`${lib.baseDir}${dir}/`, function (err, data) {
 		if (!err && data && data.length > 0) {
 			var trimmedFileNames = [];
 			data.forEach(function (fileName) {
